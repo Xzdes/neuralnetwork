@@ -1,0 +1,16 @@
+[
+  { "text": "Качество просто отвратительное, телефон сломался на второй день.", "final_verdict": "priority_complaint" },
+  { "text": "Ужасный сервис, доставка опоздала на три дня, коробка порвана.", "final_verdict": "priority_complaint" },
+  { "text": "Не работает кнопка громкости, как вернуть деньги?", "final_verdict": "priority_complaint" },
+  { "text": "Разочарован, цена не соответствует качеству.", "final_verdict": "priority_complaint" },
+  
+  { "text": "Телефон супер, очень доволен покупкой! Скорость на высоте!", "final_verdict": "positive_feedback" },
+  { "text": "Отличный дизайн и хорошая цена, всем рекомендую.", "final_verdict": "positive_feedback" },
+  { "text": "Спасибо, доставили даже раньше срока. Все работает отлично.", "final_verdict": "positive_feedback" },
+  { "text": "В целом нормальный аппарат за свою стоимость.", "final_verdict": "positive_feedback" },
+
+  { "text": "СРОЧНО КУПИТЕ НАШ ТОВАР С ОГРОМНОЙ СКИДКОЙ!!", "final_verdict": "spam_to_delete" },
+  { "text": "Легкий заработок в интернете, переходи по ссылке и регистрируйся.", "final_verdict": "spam_to_delete" },
+  { "text": "Только сегодня! Лучшая цена на рынке! КУПИТЕ СЕЙЧАС!", "final_verdict": "spam_to_delete" },
+  { "text": "Привезли вовремя, коробка целая, как и обещали.", "final_verdict": "positive_feedback" }
+]
