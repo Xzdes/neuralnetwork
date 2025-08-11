@@ -6,6 +6,6 @@
   "scripts": {
     "start": "node index.js"
   },
-  "author": "",
+  "author": "Xzdes",
   "license": "ISC"
 }

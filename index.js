@@ -1,4 +1,3 @@
-// index.js (ВЕРСИЯ 10.0 - АБСОЛЮТНАЯ ПРОЗРАЧНОСТЬ)
 const fs = require('fs');
 const path = require('path');
 const { DirectorNet } = require('./DirectorNet.js');

@@ -1,6 +1,5 @@
-// layers/layer_director.js
 const tf = require('@tensorflow/tfjs');
-const { FINAL_VERDICTS } = require('../utils'); // Импортируем утилиты
+const { FINAL_VERDICTS } = require('../utils');
 
 async function createDirector(trainingData) {
     const model = tf.sequential();

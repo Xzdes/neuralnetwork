@@ -1,4 +1,3 @@
-// utils.js
 const TOPIC_CATEGORIES = ['price', 'quality', 'delivery', 'other'];
 const SATISFACTION_CATEGORIES = ['happy', 'unhappy', 'neutral'];
 const SECURITY_CATEGORIES = ['safe', 'threat'];
