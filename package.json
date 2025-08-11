@@ -1,0 +1,14 @@
+{
+  "name": "neuralnetwork",
+  "version": "1.0.0",
+  "main": "manager_network.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Xzdes",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@tensorflow/tfjs": "^4.22.0"
+  }
+}
