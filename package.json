@@ -7,8 +7,5 @@
     "start": "node index.js"
   },
   "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "@tensorflow/tfjs": "^4.22.0"
-  }
+  "license": "ISC"
 }
