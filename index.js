@@ -21,11 +21,25 @@ console.log('>>> ЗАПУСК КОРПОРАЦИИ ИИ v6.0 (САМООБУЧА
  * Готовит идеально согласованные данные для обучения Директора.
  */
 function prepareTrainingData() {
-    console.log('[Офис] Загрузка и обработка всех отзывов из архива...');
-    // Обучаемся всегда на нашем "золотом стандарте" - reviews.json
-    const reviews = JSON.parse(fs.readFileSync('./data/reviews.json', 'utf-8'));
-    const labeledReviews = reviews.filter(r => r.final_verdict);
+    console.log('[Офис] Сканирование корпоративной базы знаний...');
+    const dataDir = './data';
+    const files = fs.readdirSync(dataDir);
+    const jsonFiles = files.filter(file => path.extname(file) === '.json');
+    
+    let allReviews = [];
+    for (const file of jsonFiles) {
+        const filePath = path.join(dataDir, file);
+        const reviewsInFile = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
+        allReviews = allReviews.concat(reviewsInFile);
+    }
 
+    // ВАЖНО: Обучаемся на ВСЕХ размеченных данных из ВСЕХ файлов!
+    const labeledReviews = allReviews.filter(r => r.final_verdict);
+
+    if (labeledReviews.length === 0) {
+        throw new Error("В базе знаний нет ни одного размеченного примера для обучения!");
+    }
+    
     const directorData = { xs: [], ys: [] };
 
     for (const review of labeledReviews) {
@@ -39,7 +53,7 @@ function prepareTrainingData() {
         directorData.ys.push(oneHotEncode(review.final_verdict, FINAL_VERDICTS));
     }
     
-    console.log(`[Офис] Подготовлено ${labeledReviews.length} согласованных кейсов для обучения Директора.`);
+    console.log(`[Офис] Подготовлено ${labeledReviews.length} согласованных кейсов из ${jsonFiles.length} файлов.`);
     return directorData;
 }
 
