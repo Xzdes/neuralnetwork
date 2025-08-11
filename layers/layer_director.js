@@ -1,4 +1,4 @@
-// layers/layer3_director.js
+// layers/layer_director.js
 const tf = require('@tensorflow/tfjs');
 const { FINAL_VERDICTS } = require('../utils'); // Импортируем утилиты
 
