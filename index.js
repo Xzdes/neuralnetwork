@@ -1,7 +1,9 @@
 const fs = require('fs');
 const path = require('path');
 const { DirectorNet } = require('./DirectorNet.js');
-const { sentimentExpert, topicExpert, spamExpert } = require('./layers/layer_experts.js');
+const { ExpertsNet } = require('./ExpertsNet.js'); // <-- НАШ НОВЫЙ НЕЙРОСЕТЕВОЙ ЭКСПЕРТ
+// Старые эксперты больше не нужны для работы, только для обучения ExpertsNet (они внутри него)
+// const { sentimentExpert, topicExpert, spamExpert } = require('./layers/layer_experts.js'); 
 const { satisfactionManager, securityManager } = require('./layers/layer_managers');
 const {
     TOPIC_CATEGORIES,
@@ -11,13 +13,42 @@ const {
     oneHotEncode,
 } = require('./utils');
 
-console.log('>>> ЗАПУСК КОРПОРАЦИИ ИИ v10.0 (АБСОЛЮТНАЯ ПРОЗРАЧНОСТЬ) <<<');
+console.log('>>> ЗАПУСК КОРПОРАЦИИ ИИ v12.0 (ПОЛНАЯ АВТОНОМИЯ) <<<');
 
 /**
- * Сканирует всю корпоративную базу знаний и готовит единый набор данных для обучения.
+ * Сканирует все JSON-файлы и возвращает массив всех текстов отзывов.
+ * Нужно для первоначального обучения ExpertsNet.
  */
-function prepareTrainingData() {
-    console.log('[Офис] Сканирование корпоративной базы знаний...');
+function getAllReviewTexts() {
+    console.log('[Офис] Сканирование всей базы знаний для сбора текстов...');
+    const dataDir = './data';
+    const files = fs.readdirSync(dataDir);
+    const jsonFiles = files.filter(file => path.extname(file) === '.json');
+    
+    let allTexts = [];
+    for (const file of jsonFiles) {
+        const filePath = path.join(dataDir, file);
+        try {
+            const reviewsInFile = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
+            for (const review of reviewsInFile) {
+                if (review.text) {
+                    allTexts.push(review.text);
+                }
+            }
+        } catch (e) {
+            console.warn(`Предупреждение: Не удалось прочитать файл ${file}.`);
+        }
+    }
+    return allTexts;
+}
+
+
+/**
+ * Готовит набор данных для обучения Директора, используя уже обученного ExpertsNet.
+ * @param {ExpertsNet} expertsNet - Обученный экземпляр L1-эксперта.
+ */
+function prepareDirectorTrainingData(expertsNet) {
+    console.log('[Офис] Подготовка данных для обучения L3-Директора...');
     const dataDir = './data';
     const files = fs.readdirSync(dataDir);
     const jsonFiles = files.filter(file => path.extname(file) === '.json');
@@ -33,15 +64,16 @@ function prepareTrainingData() {
         }
     }
 
-    const labeledReviews = allReviews.filter(r => r.final_verdict);
+    const labeledReviews = allReviews.filter(r => r.final_verdict && r.text);
 
     if (labeledReviews.length === 0) {
-        throw new Error("В базе знаний нет ни одного размеченного примера для обучения!");
+        throw new Error("В базе знаний нет ни одного размеченного примера для обучения Директора!");
     }
     
     const trainingSet = [];
     for (const review of labeledReviews) {
-        const l1_report = { sentiment: sentimentExpert(review.text), topic: topicExpert(review.text), spam: spamExpert(review.text) };
+        // Генерируем L1 отчет с помощью нашей новой нейросети
+        const l1_report = expertsNet.predict(review.text);
         const l2_report = { satisfaction: satisfactionManager(l1_report), security: securityManager(l1_report) };
         
         const input = [...oneHotEncode(l2_report.satisfaction, SATISFACTION_CATEGORIES), ...oneHotEncode(l2_report.security, SECURITY_CATEGORIES)];
@@ -49,15 +81,19 @@ function prepareTrainingData() {
         trainingSet.push({ input, output });
     }
     
-    console.log(`[Офис] Подготовлено ${labeledReviews.length} согласованных кейсов из ${jsonFiles.length} файлов для обучения.`);
+    console.log(`[Офис] Подготовлено ${labeledReviews.length} согласованных кейсов для обучения Директора.`);
     return trainingSet;
 }
 
 /**
- * Проводит полный анализ и возвращает сырой результат для анализа "мыслей".
+ * Проводит полный анализ и возвращает сырой результат.
+ * @param {string} text - Текст отзыва.
+ * @param {DirectorNet} directorNet - Обученный Директор.
+ * @param {ExpertsNet} expertsNet - Обученный Эксперт.
  */
-function getFullAnalysis(text, directorNet) {
-    const l1_report = { sentiment: sentimentExpert(text), topic: topicExpert(text), spam: spamExpert(text) };
+function getFullAnalysis(text, directorNet, expertsNet) {
+    // Получаем L1 отчет от нейросети-эксперта
+    const l1_report = expertsNet.predict(text);
     const l2_reports = { satisfaction: satisfactionManager(l1_report), security: securityManager(l1_report) };
     
     const inputForNet = [...oneHotEncode(l2_reports.satisfaction, SATISFACTION_CATEGORIES), ...oneHotEncode(l2_reports.security, SECURITY_CATEGORIES)];
@@ -73,10 +109,10 @@ function getFullAnalysis(text, directorNet) {
 }
 
 /**
- * Сканирует папку data, обрабатывает неразмеченные файлы и сохраняет результаты с подробным логированием.
+ * Сканирует папку data, обрабатывает неразмеченные файлы и сохраняет результаты.
  */
-function processAndLearnFromData(directorNet) {
-    console.log('\n\n--- ФАЗА 3: ПОИСК И ОБРАБОТКА НОВЫХ ЗАДАЧ ---');
+function processNewData(directorNet, expertsNet) {
+    console.log('\n\n--- ФАЗА 2: ПОИСК И ОБРАБОТКА НОВЫХ ЗАДАЧ ---');
     const dataDir = './data';
     const files = fs.readdirSync(dataDir);
     const jsonFiles = files.filter(file => path.extname(file) === '.json');
@@ -89,14 +125,12 @@ function processAndLearnFromData(directorNet) {
         console.log(`\n[Анализ Архива] Проверка файла: ${file}`);
 
         for (const review of reviews) {
-            if (!review.final_verdict) {
+            if (!review.final_verdict && review.text) {
                 console.log(`\n  > Найден неразмеченный отзыв: "${review.text}"`);
                 
-                // Получаем полный анализ со всеми данными для лога
-                const { l1_report, l2_reports, finalDecision, confidence } = getFullAnalysis(review.text, directorNet);
+                const { l1_report, l2_reports, finalDecision, confidence } = getFullAnalysis(review.text, directorNet, expertsNet);
                 
-                // ВЫВОДИМ "МЫСЛИ" ДИРЕКТОРА ПРЯМО В ПРОЦЕССЕ РАБОТЫ
-                console.log(`    [L1 Эксперты] Отчет:`, l1_report);
+                console.log(`    [L1 Эксперт-Нейросеть] Отчет:`, l1_report);
                 console.log(`    [L2 Менеджеры] Сводка:`, l2_reports);
                 console.log(`    [L3 Директор] Уверенность: 
                 - Жалоба: ${(confidence[0] * 100).toFixed(2)}%
@@ -114,7 +148,7 @@ function processAndLearnFromData(directorNet) {
             fs.writeFileSync(filePath, JSON.stringify(reviews, null, 2));
             console.log(`[Сохранение Знаний] Файл ${file} успешно обновлен.`);
         } else {
-            console.log(`[Анализ Архива] В файле ${file} не найдено работы.`);
+            console.log(`[Анализ Архива] В файле ${file} не найдено новой работы.`);
         }
     }
 }
@@ -123,26 +157,32 @@ function processAndLearnFromData(directorNet) {
  * Главная функция, оркестрирующая все процессы.
  */
 function main() {
-    // --- Фаза 1: Обучение ---
-    const trainingSet = prepareTrainingData();
-    console.log('[ИТ-Отдел] Создание и обучение собственного Директора...');
+    // --- Фаза 0: Обучение L1-Эксперта ---
+    // Этот эксперт учится один раз при запуске на всех доступных текстовых данных
+    const allTexts = getAllReviewTexts();
+    if (allTexts.length === 0) {
+        throw new Error("В папке data нет текстов для обучения L1-Эксперта!");
+    }
+    const expertsNet = new ExpertsNet();
+    expertsNet.train(allTexts);
+
+    // --- Фаза 1: Обучение L3-Директора ---
+    // Директор обучается на отчетах, сгенерированных свежеобученным L1-Экспертом
+    const directorTrainingSet = prepareDirectorTrainingData(expertsNet);
+    console.log('[ИТ-Отдел] Создание и обучение L3-Директора...');
     
-    const directorNet = new DirectorNet(5, 8, 3);
+    const directorNet = new DirectorNet(5, 8, 3); // Вход 5 (3 sat + 2 sec), скрытый 8, выход 3
     const epochs = 1000;
     for (let i = 0; i < epochs; i++) {
-        for (const data of trainingSet) {
+        for (const data of directorTrainingSet) {
             directorNet.train(data.input, data.output);
         }
     }
     
-    console.log(`[ИТ-Отдел] Директор обучен и готов к работе!`);
+    console.log(`[ИТ-Отдел] L3-Директор обучен и готов к работе!`);
 
-    // --- Фаза 2: Быстрая проверка ---
-    console.log('\n--- ФАЗА 2: БЫСТРАЯ ПРОВЕРКА КОМПЕТЕНТНОСТИ ---');
-    // ... быстрая проверка остается для самоконтроля ...
-    
-    // --- Фаза 3: Автономная работа с полным логированием ---
-    processAndLearnFromData(directorNet);
+    // --- Фаза 2: Автономная работа с полным логированием ---
+    processNewData(directorNet, expertsNet);
 
     console.log('\n>>> РАБОЧИЙ ЦИКЛ КОРПОРАЦИИ ЗАВЕРШЕН <<<');
 }
