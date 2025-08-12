@@ -1,25 +1,466 @@
 [
-  { "text": "Качество просто отвратительное, телефон сломался на второй день.", "final_verdict": "priority_complaint" },
-  { "text": "Ужасный сервис, доставка опоздала на три дня, коробка порвана.", "final_verdict": "priority_complaint" },
-  { "text": "Не работает кнопка громкости, как вернуть деньги? Разочарован.", "final_verdict": "priority_complaint" },
-  { "text": "Батарея не держит заряд совершенно, это просто обман!", "final_verdict": "priority_complaint" },
-  { "text": "Экран треснул в кармане, материалы корпуса очень плохие.", "final_verdict": "priority_complaint" },
-  { "text": "Консультант нахамил, больше у вас ничего не куплю.", "final_verdict": "priority_complaint" },
-  { "text": "Прислали не тот цвет! Как можно быть такими невнимательными?", "final_verdict": "priority_complaint" },
-
-  { "text": "Телефон супер, очень доволен покупкой! Скорость на высоте!", "final_verdict": "positive_feedback" },
-  { "text": "Отличный дизайн и хорошая цена, всем рекомендую.", "final_verdict": "positive_feedback" },
-  { "text": "Спасибо, доставили даже раньше срока. Все работает отлично.", "final_verdict": "positive_feedback" },
-  { "text": "В целом нормальный аппарат за свою стоимость, претензий нет.", "final_verdict": "positive_feedback" },
-  { "text": "Камера просто бомба! Снимки получаются невероятные.", "final_verdict": "positive_feedback" },
-  { "text": "Менеджер помог с выбором, очень вежливый сервис, спасибо!", "final_verdict": "positive_feedback" },
-  { "text": "Лучшее соотношение цена/качество на рынке. Доволен.", "final_verdict": "positive_feedback" },
-  { "text": "Привезли вовремя, коробка целая, как и обещали.", "final_verdict": "positive_feedback" },
-  { "text": "Доставка в срок, к упаковке претензий нет.", "final_verdict": "positive_feedback" },
-
-  { "text": "СРОЧНО КУПИТЕ НАШ ТОВАР С ОГРОМНОЙ СКИДКОЙ!!", "final_verdict": "spam_to_delete" },
-  { "text": "Легкий заработок в интернете, переходи по ссылке и регистрируйся.", "final_verdict": "spam_to_delete" },
-  { "text": "Только сегодня! Лучшая цена на рынке! КУПИТЕ СЕЙЧАС!", "final_verdict": "spam_to_delete" },
-  { "text": "Вы выиграли новый телефон! Кликните сюда, чтобы забрать приз.", "final_verdict": "spam_to_delete" },
-  { "text": "Увеличьте свой доход без вложений! Узнайте как по ссылке.", "final_verdict": "spam_to_delete" }
+  {
+    "text": "Это просто фантастика. Очередной 'премиальный' гаджет, который перестал заряжаться через три дня. Моему восторгу нет предела.",
+    "final_verdict": "priority_complaint"
+  },
+  {
+    "text": "Камера в этом телефоне — произведение искусства, снимает потрясающе. Но батарея — это какой-то позор, не доживает и до вечера.",
+    "final_verdict": "priority_complaint"
+  },
+  {
+    "text": "Был очень удивлен, курьер приехал на час раньше заявленного времени. Супер сервис!",
+    "final_verdict": "positive_feedback"
+  },
+  {
+    "text": "Поддержка просто нахамила и бросила трубку. Я требую связаться со мной старшего менеджера для решения моей проблемы.",
+    "final_verdict": "priority_complaint"
+  },
+  {
+    "text": "Скажите, а почему в рекламе заявлена функция быстрой зарядки, а по факту ее нет? Это обман?",
+    "final_verdict": "priority_complaint"
+  },
+  {
+    "text": "URGENT: Your account has shown suspicious activity. To prevent deactivation, please verify your identity by clicking the link on our website immediately.",
+    "final_verdict": "spam_to_delete"
+  },
+  {
+    "text": "В комплекте шел кабель USB-C и блок питания на 25 Ватт.",
+    "final_verdict": "positive_feedback"
+  },
+  {
+    "text": "За свою стоимость — вполне неплохой аппарат. Не ждите чудес, но базовые функции выполняет.",
+    "final_verdict": "positive_feedback"
+  },
+  {
+    "text": "Хочу выразить благодарность консультанту Марии! Очень вежливо и профессионально помогла мне с выбором. Спасибо!",
+    "final_verdict": "positive_feedback"
+  },
+  {
+    "text": "Интерфейс немного подтормаживает, когда открыто много приложений. Не критично, но неприятно.",
+    "final_verdict": "priority_complaint"
+  },
+  {
+    "text": "ok",
+    "final_verdict": "positive_feedback"
+  },
+  {
+    "text": "Предлагаем уникальные инвестиционные возможности с гарантированным доходом! Узнайте больше на нашем сайте.",
+    "final_verdict": "spam_to_delete"
+  },
+  {
+    "text": "Корпус сделан из переработанного пластика. Это похвально.",
+    "final_verdict": "positive_feedback"
+  },
+  {
+    "text": "Скидка 50% только сегодня! Успейте купить два по цене одного! Кликните здесь!",
+    "final_verdict": "spam_to_delete"
+  },
+  {
+    "text": "Ждал доставку три недели вместо обещанных трех дней. Коробка вся помятая. Ужасное отношение.",
+    "final_verdict": "priority_complaint"
+  },
+  {
+    "text": "Телефон греется как печка, а цена как за самолет. Я полностью разочарован.",
+    "final_verdict": "priority_complaint"
+  },
+  {
+    "text": "Спасибо курьеру! Привезли все вовремя, был очень вежлив и помог проверить коробку.",
+    "final_verdict": "positive_feedback"
+  },
+  {
+    "text": "Сенсация! Заработок в интернете без риска! Кликните на нашем сайте и получите приз!",
+    "final_verdict": "spam_to_delete"
+  },
+  {
+    "text": "Обычный телефон. Интерфейс стандартный, батарея держит день.",
+    "final_verdict": "positive_feedback"
+  },
+  {
+    "text": "Подскажите, это нормально, что новый ноутбук перестал включаться через неделю?",
+    "final_verdict": "priority_complaint"
+  },
+  {
+    "text": "Качество просто отвратительное, телефон сломался на второй день.",
+    "final_verdict": "priority_complaint"
+  },
+  {
+    "text": "Ужасный сервис, доставка опоздала на три дня, коробка порвана.",
+    "final_verdict": "priority_complaint"
+  },
+  {
+    "text": "Не работает кнопка громкости, как вернуть деньги? Разочарован.",
+    "final_verdict": "priority_complaint"
+  },
+  {
+    "text": "Батарея не держит заряд совершенно, это просто обман!",
+    "final_verdict": "priority_complaint"
+  },
+  {
+    "text": "Экран треснул в кармане, материалы корпуса очень плохие.",
+    "final_verdict": "priority_complaint"
+  },
+  {
+    "text": "Консультант нахамил, больше у вас ничего не куплю.",
+    "final_verdict": "priority_complaint"
+  },
+  {
+    "text": "Прислали не тот цвет! Как можно быть такими невнимательными?",
+    "final_verdict": "priority_complaint"
+  },
+  {
+    "text": "Телефон супер, очень доволен покупкой! Скорость на высоте!",
+    "final_verdict": "positive_feedback"
+  },
+  {
+    "text": "Отличный дизайн и хорошая цена, всем рекомендую.",
+    "final_verdict": "positive_feedback"
+  },
+  {
+    "text": "Спасибо, доставили даже раньше срока. Все работает отлично.",
+    "final_verdict": "positive_feedback"
+  },
+  {
+    "text": "В целом нормальный аппарат за свою стоимость, претензий нет.",
+    "final_verdict": "positive_feedback"
+  },
+  {
+    "text": "Камера просто бомба! Снимки получаются невероятные.",
+    "final_verdict": "positive_feedback"
+  },
+  {
+    "text": "Менеджер помог с выбором, очень вежливый сервис, спасибо!",
+    "final_verdict": "positive_feedback"
+  },
+  {
+    "text": "Лучшее соотношение цена/качество на рынке. Доволен.",
+    "final_verdict": "positive_feedback"
+  },
+  {
+    "text": "Привезли вовремя, коробка целая, как и обещали.",
+    "final_verdict": "positive_feedback"
+  },
+  {
+    "text": "Доставка в срок, к упаковке претензий нет.",
+    "final_verdict": "positive_feedback"
+  },
+  {
+    "text": "СРОЧНО КУПИТЕ НАШ ТОВАР С ОГРОМНОЙ СКИДКОЙ!!",
+    "final_verdict": "spam_to_delete"
+  },
+  {
+    "text": "Легкий заработок в интернете, переходи по ссылке и регистрируйся.",
+    "final_verdict": "spam_to_delete"
+  },
+  {
+    "text": "Только сегодня! Лучшая цена на рынке! КУПИТЕ СЕЙЧАС!",
+    "final_verdict": "spam_to_delete"
+  },
+  {
+    "text": "Вы выиграли новый телефон! Кликните сюда, чтобы забрать приз.",
+    "final_verdict": "spam_to_delete"
+  },
+  {
+    "text": "Увеличьте свой доход без вложений! Узнайте как по ссылке.",
+    "final_verdict": "spam_to_delete"
+  },
+  {
+    "text": "Телефон сильно греется во время разговора, я беспокоюсь.",
+    "final_verdict": "priority_complaint"
+  },
+  {
+    "text": "Пользовательский интерфейс очень чистый и интуитивный, одно удовольствие.",
+    "final_verdict": "positive_feedback"
+  },
+  {
+    "text": "Зарядное устройство, которое шло в комплекте, перестало работать через месяц.",
+    "final_verdict": "priority_complaint"
+  },
+  {
+    "text": "Это нормально, что доставка заняла три недели? Я живу в соседнем городе.",
+    "final_verdict": "priority_complaint"
+  },
+  {
+    "text": "Служба поддержки не смогла мне помочь, просто переключали с одного оператора на другого.",
+    "final_verdict": "priority_complaint"
+  },
+  {
+    "text": "Ваш аккаунт может быть заблокирован! Срочно подтвердите данные по ссылке.",
+    "final_verdict": "spam_to_delete"
+  },
+  {
+    "text": "Экран просто фантастический, цвета очень сочные и яркие.",
+    "final_verdict": "positive_feedback"
+  },
+  {
+    "text": "Цена на этот аппарат кажется завышенной, у конкурентов есть модели получше.",
+    "final_verdict": "priority_complaint"
+  },
+  {
+    "text": "Наушники в подарок — это приятно, спасибо!",
+    "final_verdict": "positive_feedback"
+  },
+  {
+    "text": "Почему в новом обновлении убрали мою любимую функцию? Верните!",
+    "final_verdict": "priority_complaint"
+  },
+  {
+    "text": "Обещали скидку при покупке, но в чеке ее не оказалось. Обман.",
+    "final_verdict": "priority_complaint"
+  },
+  {
+    "text": "Чехол сел идеально, материал приятный на ощупь.",
+    "final_verdict": "positive_feedback"
+  },
+  {
+    "text": "Не могу найти, как включить темную тему. Подскажите?",
+    "final_verdict": "priority_complaint"
+  },
+  {
+    "text": "100% гарантия дохода! Наши инвестиционные стратегии лучшие на рынке.",
+    "final_verdict": "spam_to_delete"
+  },
+  {
+    "text": "Корпус выглядит хлипким, боюсь его уронить.",
+    "final_verdict": "priority_complaint"
+  },
+  {
+    "text": "Батареи хватает на два дня активного использования, я в восторге.",
+    "final_verdict": "positive_feedback"
+  },
+  {
+    "text": "Курьер был очень вежлив и помог с проверкой товара.",
+    "final_verdict": "positive_feedback"
+  },
+  {
+    "text": "Фотографии получаются размытыми при плохом освещении.",
+    "final_verdict": "priority_complaint"
+  },
+  {
+    "text": "Соотношение цена/возможности — просто идеальное.",
+    "final_verdict": "positive_feedback"
+  },
+  {
+    "text": "В рекламе говорили одно, а по факту совсем другое. Разочарован.",
+    "final_verdict": "priority_complaint"
+  },
+  {
+    "text": "Обещали водонепроницаемость, а он 'умер' после первого дождя. Отлично поработали!",
+    "final_verdict": "priority_complaint"
+  },
+  {
+    "text": "Купил телефон в подарок маме, она очень довольна, разобралась за пять минут.",
+    "final_verdict": "positive_feedback"
+  },
+  {
+    "text": "Почему я должен платить за возврат товара, если это ваш косяк?",
+    "final_verdict": "priority_complaint"
+  },
+  {
+    "text": "Вибрация почти не ощущается в кармане, пропускаю звонки.",
+    "final_verdict": "priority_complaint"
+  },
+  {
+    "text": "Книга пришла с помятыми углами. Мелочь, а неприятно.",
+    "final_verdict": "priority_complaint"
+  },
+  {
+    "text": "Ваша посылка ожидает в почтовом отделении. Для отслеживания перейдите на наш сайт.",
+    "final_verdict": "spam_to_delete"
+  },
+  {
+    "text": "Звук в наушниках чистый, глубокий бас, я в восторге.",
+    "final_verdict": "positive_feedback"
+  },
+  {
+    "text": "Никто не предупредил, что для этой модели нет защитных стекол в наличии.",
+    "final_verdict": "priority_complaint"
+  },
+  {
+    "text": "Приложение постоянно вылетает после последнего обновления. Сделайте что-нибудь!",
+    "final_verdict": "priority_complaint"
+  },
+  {
+    "text": "Спасибо за быструю реакцию службы поддержки, проблему решили за час.",
+    "final_verdict": "positive_feedback"
+  },
+  {
+    "text": "Телефон скользкий, как кусок мыла. Без чехла использовать невозможно.",
+    "final_verdict": "priority_complaint"
+  },
+  {
+    "text": "В описании указана одна емкость батареи, а по факту держит меньше.",
+    "final_verdict": "priority_complaint"
+  },
+  {
+    "text": "За такую стоимость ожидал большего. Просто обычный телефон.",
+    "final_verdict": "priority_complaint"
+  },
+  {
+    "text": "Получите эксклюзивный доступ к закрытым инвестиционным фондам. Только для наших подписчиков.",
+    "final_verdict": "spam_to_delete"
+  },
+  {
+    "text": "Наконец-то нормальный размер, удобно лежит в руке.",
+    "final_verdict": "positive_feedback"
+  },
+  {
+    "text": "Автояркость экрана живет своей жизнью, постоянно меняется.",
+    "final_verdict": "priority_complaint"
+  },
+  {
+    "text": "Курьер позвонил за час, как и просил. Отличный сервис.",
+    "final_verdict": "positive_feedback"
+  },
+  {
+    "text": "Где найти инструкцию на русском языке?",
+    "final_verdict": "priority_complaint"
+  },
+  {
+    "text": "Камера снимает хорошо только днем, вечером качество ужасное.",
+    "final_verdict": "priority_complaint"
+  },
+  {
+    "text": "Просто работает. Ничего выдающегося, но и проблем нет.",
+    "final_verdict": "positive_feedback"
+  },
+  {
+    "text": "Кнопка увеличения громкости иногда просто не нажимается.",
+    "final_verdict": "priority_complaint"
+  },
+  {
+    "text": "Яркий фонарик, часто выручает в темноте, спасибо за такую мелочь!",
+    "final_verdict": "positive_feedback"
+  },
+  {
+    "text": "Ваша последняя прошивка превратила мой быстрый телефон в тормоза.",
+    "final_verdict": "priority_complaint"
+  },
+  {
+    "text": "Три раза звонил в поддержку, три раза обещали перезвонить и тишина.",
+    "final_verdict": "priority_complaint"
+  },
+  {
+    "text": "А где, собственно, обещанный в рекламе второй год гарантии?",
+    "final_verdict": "priority_complaint"
+  },
+  {
+    "text": "Поздравляем! Ваш номер телефона выбран для получения специального приза!",
+    "final_verdict": "spam_to_delete"
+  },
+  {
+    "text": "Стекло Gorilla Glass — это вещь! Уже ронял, и ни одной царапины.",
+    "final_verdict": "positive_feedback"
+  },
+  {
+    "text": "Зачем в телефоне столько предустановленных приложений, которые нельзя удалить?",
+    "final_verdict": "priority_complaint"
+  },
+  {
+    "text": "Цветопередача экрана просто великолепна, смотреть фильмы одно удовольствие.",
+    "final_verdict": "positive_feedback"
+  },
+  {
+    "text": "Заказ пришел не полностью, не хватает зарядного устройства.",
+    "final_verdict": "priority_complaint"
+  },
+  {
+    "text": "Оплатил экспресс-доставку, а курьер приехал на день позже. За что я платил?",
+    "final_verdict": "priority_complaint"
+  },
+  {
+    "text": "Очень удобная функция разблокировки по лицу, работает мгновенно.",
+    "final_verdict": "positive_feedback"
+  },
+  {
+    "text": "Сайт у вас очень неудобный, еле смог оформить заказ.",
+    "final_verdict": "priority_complaint"
+  },
+  {
+    "text": "Ваш банк одобрил вам кредит на специальных условиях. Узнайте подробности.",
+    "final_verdict": "spam_to_delete"
+  },
+  {
+    "text": "Корпус слишком маркий, постоянно в отпечатках пальцев.",
+    "final_verdict": "priority_complaint"
+  },
+  {
+    "text": "Могли бы и пленку на экран наклеить на заводе.",
+    "final_verdict": "priority_complaint"
+  },
+  {
+    "text": "Наконец-то нашел телефон с нормальным аккумулятором, который живет до вечера.",
+    "final_verdict": "positive_feedback"
+  },
+  {
+    "text": "Консультант в магазине был очень компетентен и помог выбрать модель.",
+    "final_verdict": "positive_feedback"
+  },
+  {
+    "text": "Почему-то не приходят уведомления от некоторых приложений.",
+    "final_verdict": "priority_complaint"
+  },
+  {
+    "text": "В целом, ожидал большего. Не плохо, но и не вау.",
+    "final_verdict": "priority_complaint"
+  },
+  {
+    "text": "Сервис в магазине отличный, но сам товар сломался через час.",
+    "final_verdict": "priority_complaint"
+  },
+  {
+    "text": "Автономность просто поражает, два дня без подзарядки — легко!",
+    "final_verdict": "positive_feedback"
+  },
+  {
+    "text": "И это вы называете 'быстрой' доставкой? Ждал курьера полдня.",
+    "final_verdict": "priority_complaint"
+  },
+  {
+    "text": "Телефон работает, но не так быстро, как я ожидал после просмотра обзоров.",
+    "final_verdict": "priority_complaint"
+  },
+  {
+    "text": "Приглашаем на бесплатный вебинар о финансовой грамотности. Регистрация на сайте.",
+    "final_verdict": "spam_to_delete"
+  },
+  {
+    "text": "Внешний вид просто 10 из 10. В руке лежит как влитой.",
+    "final_verdict": "positive_feedback"
+  },
+  {
+    "text": "Почему защитное стекло наклеено с пузырями? Это заводской брак?",
+    "final_verdict": "priority_complaint"
+  },
+  {
+    "text": "Без нареканий. Просто включил и пользуюсь. Именно то, что я искал.",
+    "final_verdict": "positive_feedback"
+  },
+  {
+    "text": "Производительность в играх немного разочаровала, ожидал большего.",
+    "final_verdict": "priority_complaint"
+  },
+  {
+    "text": "Тихий ужас! После обновления пропали все контакты!",
+    "final_verdict": "priority_complaint"
+  },
+  {
+    "text": "Подскажите, пожалуйста, есть ли для этой модели официальные чехлы?",
+    "final_verdict": "positive_feedback"
+  },
+  {
+    "text": "Отличная цена по акции, успел купить с хорошей скидкой.",
+    "final_verdict": "positive_feedback"
+  },
+  {
+    "text": "Камера делает отличные снимки, но видео пишет с подергиваниями.",
+    "final_verdict": "priority_complaint"
+  },
+  {
+    "text": "Спасибо консультанту Марии за помощь и терпение!",
+    "final_verdict": "positive_feedback"
+  },
+  {
+    "text": "Разблокировка по лицу срабатывает через раз, особенно при плохом свете.",
+    "final_verdict": "priority_complaint"
+  }
 ]
